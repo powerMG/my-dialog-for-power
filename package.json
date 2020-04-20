@@ -2,7 +2,7 @@
   "name": "my-dialog-for-power",
   "version": "1.0.0",
   "description": "一个自定义的弹窗插件",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "webpack"
