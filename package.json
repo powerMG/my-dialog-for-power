@@ -4,7 +4,7 @@
   "description": "一个自定义的弹窗插件",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-searver",
+    "dev": "webpack-dev-server",
     "build": "webpack"
   },
   "keywords": [
@@ -20,8 +20,10 @@
     "url": "https://github.com/powerMG/my-dialog-for-power.git"
   },
   "devDependencies": {
+    "html-webpack-plugin": "^4.2.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
-  }
+  },
+  "dependencies": {}
 }
