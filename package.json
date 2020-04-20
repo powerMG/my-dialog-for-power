@@ -4,17 +4,24 @@
   "description": "一个自定义的弹窗插件",
   "main": "index.js",
   "scripts": {
-    "dev":"dev-webpack-searver",
-    "build":"webpack"
+    "dev": "webpack-dev-searver",
+    "build": "webpack"
   },
-  "keywords": ["dailog"],
+  "keywords": [
+    "dailog"
+  ],
   "author": "xmwang",
   "license": "MIT",
-  "repository":{
+  "repository": {
     "type": "git",
-    "url": "https://github.com/powerMG/my-dailog-for-power.git"
+    "url": "https://github.com/powerMG/my-dialog-for-power.git"
   },
   "bugs": {
-    "url": "https://github.com/powerMG/my-dailog-for-power.git"
+    "url": "https://github.com/powerMG/my-dialog-for-power.git"
+  },
+  "devDependencies": {
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   }
 }
