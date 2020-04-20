@@ -1,0 +1,20 @@
+{
+  "name": "my-dailog-for-power",
+  "version": "1.0.0",
+  "description": "一个自定义的弹窗插件",
+  "main": "index.js",
+  "scripts": {
+    "dev":"dev-webpack-searver",
+    "build":"webpack"
+  },
+  "keywords": ["dailog"],
+  "author": "xmwang",
+  "license": "MIT",
+  "repository":{
+    "type": "git",
+    "url": "https://github.com/powerMG/my-dailog-for-power.git"
+  },
+  "bugs": {
+    "url": "https://github.com/powerMG/my-dailog-for-power.git"
+  }
+}
