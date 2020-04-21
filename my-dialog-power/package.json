@@ -1,7 +1,8 @@
 {
   "name": "my-dialog-power",
-  "version": "0.1.0",
-  "main":"my-dialog-for-power",
+  "version": "0.1.3",
+  "main": "dist/my-dialog-power.common.js",
+  "style":"dist/my-dialog-power.css",
   "private": false,
   "scripts": {
     "dev": "vue-cli-service serve",
