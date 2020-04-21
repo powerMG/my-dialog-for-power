@@ -12,10 +12,11 @@
 </template>
 
 <script>
-import titleBar from "./items/titleBar";
-import contentBar from "./items/contentBar";
-import footerBar from "./items/footerBar";
+import titleBar from "./components/titleBar";
+import contentBar from "./components/contentBar";
+import footerBar from "./components/footerBar";
 export default {
+  name: "my-dialog-power",
   props: ["dataInfo"],
   data() {
     return {
@@ -51,7 +52,7 @@ export default {
       });
     },
     /* 关闭当前弹窗信息 */
-    closeDialog(event, callback) {        
+    closeDialog(event, callback) {
       // 获取当前dialog DOM元素
       let _msgDom = event.target.parentNode.parentNode;
       // 获取当前类名
