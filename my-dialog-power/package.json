@@ -1,6 +1,7 @@
 {
   "name": "my-dialog-power",
   "version": "0.1.0",
+  "main":"my-dialog-for-power",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
