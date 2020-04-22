@@ -1,3 +1,9 @@
+<!--
+ * @Author: xmwang
+ * @LastEditors: xmwang
+ * @Date: 2020-04-22 09:50:42
+ * @LastEditTime: 2020-04-22 18:57:13
+ -->
 <template>
   <div class="dialog-power-group">
     <div ref="dialogList" v-for="(item, i) in dataInfo" :key="i" class="dialog-power-main">
