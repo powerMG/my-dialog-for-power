@@ -1,20 +1,13 @@
-import myDialogPlugin from "./myDialogPlugin.vue";
-const components = [myDialogPlugin]
-/**
- * 绑定组件
- * @param Vue
+/*
+ * @Author: xmwang
+ * @LastEditors: xmwang
+ * @Date: 2020-04-22 18:37:31
+ * @LastEditTime: 2020-04-23 10:27:25
  */
-function bindComponents(Vue) {
-    components.forEach(component => {
-        Vue.component(component.name, component)
-    })
-}
+import Vue from 'vue'
+import App from './App.vue'
+Vue.config.productionTip = false
 
-/**
- * 为了使用 Vue.use() 使用插件
- * @param Vue
- */
-function install(Vue) {
-    bindComponents(Vue)
-}
-export default { install, myDialogPlugin }
+new Vue({
+  render: (h) => h(App),
+}).$mount('#app')

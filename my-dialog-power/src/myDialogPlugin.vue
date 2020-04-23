@@ -2,16 +2,17 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-22 09:50:42
- * @LastEditTime: 2020-04-22 18:57:13
+ * @LastEditTime: 2020-04-23 14:58:27
  -->
 <template>
   <div class="dialog-power-group">
-    <div ref="dialogList" v-for="(item, i) in dataInfo" :key="i" class="dialog-power-main">
-      <title-bar :title="item.title" @close="closeDialog" />
+    <div ref="dialogList" v-for="(item, i) in currentDataInfo" :key="i" class="dialog-power-main">
+      {{item.__id__}}
+      <title-bar :title="item.title" @close="closeDialog(arguments[0],arguments[1],i)" />
       <content-bar :content="item.content" />
       <footer-bar
-        @ok="closeDialog(arguments[0],item.ok)"
-        @cancel="closeDialog(arguments[0],item.cancel)"
+        @ok="closeDialog(arguments[0],item.ok,i)"
+        @cancel="closeDialog(arguments[0],item.cancel,i)"
       />
     </div>
   </div>
@@ -32,17 +33,25 @@ export default {
   mounted() {
     this.initDialogTop();
   },
+  computed: {
+    /* 计算当前数据源信息 */
+    currentDataInfo() {
+      return this.dataInfo.map((item, i) => {
+        item.__id__ = i;
+        return item;
+      });
+    }
+  },
   components: {
     titleBar,
     contentBar,
     footerBar
   },
-  wathe: {
+  watch: {
     dataInfo(val) {
-      if (val.length > 0) this.initDialogTop();
+      if (val.length > 0) setTimeout(() => this.initDialogTop(), 300);
     }
   },
-  computed: {},
   methods: {
     /* 初始化当前dialog顶部距离 */
     initDialogTop() {
@@ -54,20 +63,23 @@ export default {
         self.defaultTop = 160;
       }
       _dialogDom.forEach((item, i) => {
+        item.className = `${item.className} dialog-power-item`;
         item.style = `top:${i * this.defaultTop + 10}px;`;
       });
     },
     /* 关闭当前弹窗信息 */
-    closeDialog(event, callback) {
+    closeDialog(event, callback, index) {
+      let self = this;
       // 获取当前dialog DOM元素
       let _msgDom = event.target.parentNode.parentNode;
       // 获取当前类名
       let _currentClass = _msgDom.className;
       // 触发关闭动画
-      _msgDom.className = `${_currentClass} dialog-power-close`;
+      _msgDom.className = `dialog-power-close ${_currentClass}`;
       // 定时移除当前关闭元素
       setTimeout(() => {
-        _msgDom.remove();
+        // _msgDom.remove();
+        self.dataInfo.splice(index, 1);
         if (typeof callback === "function") callback();
       }, 1000);
     }
@@ -83,11 +95,13 @@ export default {
   font-size: 12px;
   position: fixed;
   top: 10px;
-  right: 10px;
+  right: -300px;
   background: #fff;
+  transition: right 1s;
 }
 .dialog-power-close {
-  animation: dialogClose 1s 1;
+  right: -300px !important;
+  /* animation: dialogClose 1s 1; */
 }
 @keyframes dialogClose {
   from {
@@ -95,6 +109,18 @@ export default {
   }
   to {
     right: -300px;
+  }
+}
+.dialog-power-main.dialog-power-item {
+  right: 10px;
+  /* animation: dialogShow 1s 1; */
+}
+@keyframes dialogShow {
+  from {
+    right: -300;
+  }
+  to {
+    right: 10px;
   }
 }
 </style>
