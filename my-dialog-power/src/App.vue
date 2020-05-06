@@ -2,12 +2,13 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-23 10:14:22
- * @LastEditTime: 2020-04-23 10:31:45
+ * @LastEditTime: 2020-05-06 15:42:54
  -->
 
 <template>
   <div id="app">
     <my-dialog-power :dataInfo="dataInfo" />
+    <textarea cols="150" rows="30" :value="JSON.stringify(dataInfo)"></textarea>
     <button @click="addData">添加</button>
   </div>
 </template>

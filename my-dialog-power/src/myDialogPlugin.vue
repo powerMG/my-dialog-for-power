@@ -2,13 +2,17 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-22 09:50:42
- * @LastEditTime: 2020-04-23 14:58:27
+ * @LastEditTime: 2020-05-06 19:07:11
  -->
 <template>
   <div class="dialog-power-group">
-    <div ref="dialogList" v-for="(item, i) in currentDataInfo" :key="i" class="dialog-power-main">
-      {{item.__id__}}
-      <title-bar :title="item.title" @close="closeDialog(arguments[0],arguments[1],i)" />
+    <div
+      v-for="(item, i) in currentDataInfo"
+      :key="i"
+      :ref="'dialogList'+item.__id__"
+      class="dialog-power-main animated lightSpeedIn"
+    >
+      <title-bar :title="item.title" @close="closeDialog(arguments[0],arguments[1],item.__id__)" />
       <content-bar :content="item.content" />
       <footer-bar
         @ok="closeDialog(arguments[0],item.ok,i)"
@@ -22,6 +26,7 @@
 import titleBar from "./components/titleBar";
 import contentBar from "./components/contentBar";
 import footerBar from "./components/footerBar";
+import "animate.css";
 export default {
   name: "my-dialog-power",
   props: ["dataInfo"],
@@ -31,7 +36,7 @@ export default {
     };
   },
   mounted() {
-    this.initDialogTop();
+    this.initDialogTop(this.dataInfo);
   },
   computed: {
     /* 计算当前数据源信息 */
@@ -49,38 +54,42 @@ export default {
   },
   watch: {
     dataInfo(val) {
-      if (val.length > 0) setTimeout(() => this.initDialogTop(), 300);
+      if (val.length > 0) setTimeout(() => this.initDialogTop(val), 300);
     }
   },
   methods: {
     /* 初始化当前dialog顶部距离 */
-    initDialogTop() {
+    initDialogTop(dataInfo) {
       let self = this;
-      let _dialogDom = self.$refs.dialogList;
-      if (_dialogDom.length > 4) {
+      if (dataInfo.length > 4) {
         self.defaultTop = 10;
       } else {
         self.defaultTop = 160;
       }
-      _dialogDom.forEach((item, i) => {
-        item.className = `${item.className} dialog-power-item`;
-        item.style = `top:${i * this.defaultTop + 10}px;`;
+      dataInfo.forEach((item, i) => {
+        let _currentVm = self.$refs[`dialogList${item.__id__}`][0];
+        _currentVm.style = `top:${i * self.defaultTop + 10}px;`;
       });
     },
     /* 关闭当前弹窗信息 */
-    closeDialog(event, callback, index) {
+    closeDialog(event, callback, id) {
       let self = this;
       // 获取当前dialog DOM元素
-      let _msgDom = event.target.parentNode.parentNode;
+      let _msgDom = self.$refs[`dialogList${id}`][0];
       // 获取当前类名
-      let _currentClass = _msgDom.className;
+      // let _currentClass = _msgDom.className;
       // 触发关闭动画
-      _msgDom.className = `dialog-power-close ${_currentClass}`;
+      _msgDom.className = `dialog-power-main animated lightSpeedOut`;
+      // _msgDom.style = "right: -300px;";
       // 定时移除当前关闭元素
       setTimeout(() => {
-        // _msgDom.remove();
-        self.dataInfo.splice(index, 1);
-        if (typeof callback === "function") callback();
+        let _removeInfo = self.dataInfo.find(item => item.__id__ === id);
+        console.log("_removeInfo", _removeInfo);
+        if (_removeInfo) {
+          self.dataInfo.splice(self.dataInfo.indexOf(_removeInfo), 1);
+          // self.initDialogTop(self.dataInfo);
+          if (typeof callback === "function") callback();
+        }
       }, 1000);
     }
   }
@@ -95,7 +104,6 @@ export default {
   font-size: 12px;
   position: fixed;
   top: 10px;
-  right: -300px;
   background: #fff;
   transition: right 1s;
 }
@@ -103,24 +111,24 @@ export default {
   right: -300px !important;
   /* animation: dialogClose 1s 1; */
 }
-@keyframes dialogClose {
+/* @keyframes dialogClose {
   from {
     right: 10;
   }
   to {
     right: -300px;
   }
-}
+} */
 .dialog-power-main.dialog-power-item {
   right: 10px;
   /* animation: dialogShow 1s 1; */
 }
-@keyframes dialogShow {
+/* @keyframes dialogShow {
   from {
     right: -300;
   }
   to {
     right: 10px;
   }
-}
+} */
 </style>
