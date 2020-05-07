@@ -1,7 +1,13 @@
+<!--
+ * @Author: xmwang
+ * @LastEditors: xmwang
+ * @Date: 2020-04-22 09:50:42
+ * @LastEditTime: 2020-05-07 15:49:36
+ -->
 <template>
   <div class="dialog-power-title">
     <div class="dialog-power-title-item dialog-power-title-left">{{title}}</div>
-    <div class="dialog-power-title-item dialog-power-title-right" @click="closeDialog($event)">X</div>
+    <div class="dialog-power-title-item dialog-power-title-right" @click="closeDialog()">X</div>
   </div>
 </template>
 
@@ -13,8 +19,8 @@ export default {
   },
   methods: {
     /* 关闭窗体 */
-    closeDialog(event) {
-      this.$emit("close", event);
+    closeDialog() {
+      this.$emit("close");
     }
   }
 };

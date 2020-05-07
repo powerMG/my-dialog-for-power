@@ -1,7 +1,13 @@
+<!--
+ * @Author: xmwang
+ * @LastEditors: xmwang
+ * @Date: 2020-04-22 09:50:42
+ * @LastEditTime: 2020-05-07 15:50:13
+ -->
 <template>
   <div class="dialog-power-footer">
-    <div class="dialog-power-btn dialog-power-btn-ok" @click="ok($event)">确定</div>
-    <div class="dialog-power-btn dialog-power-btn-cancel" @click="cancel($event)">取消</div>
+    <div class="dialog-power-btn dialog-power-btn-ok" @click="ok()">确定</div>
+    <div class="dialog-power-btn dialog-power-btn-cancel" @click="cancel()">取消</div>
   </div>
 </template>
 
@@ -12,12 +18,12 @@ export default {
   },
   methods: {
     /* 确定按钮触发 */
-    ok(event) {
-      this.$emit("ok", event);
+    ok() {
+      this.$emit("ok");
     },
     /* 取消按钮触发 */
-    cancel(event) {
-      this.$emit("cancel", event);
+    cancel() {
+      this.$emit("cancel");
     }
   }
 };
