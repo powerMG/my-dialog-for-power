@@ -2,12 +2,15 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-23 10:14:22
- * @LastEditTime: 2020-05-07 18:35:13
+ * @LastEditTime: 2020-05-08 14:18:46
  -->
 
 <template>
   <div id="app">
-    <my-dialog-power :dataInfo.sync="dataInfo" />
+    <my-dialog-power :dataInfo.sync="dataInfo" @ok="ok" @cancel="cancel" @close="close">
+      <!-- <div slot="content">content</div>
+      <div slot="footer">footer</div>-->
+    </my-dialog-power>
     <textarea cols="150" rows="30" :value="JSON.stringify(dataInfo)"></textarea>
     <br />
     <button @click="addData">添加</button>
@@ -24,6 +27,8 @@ export default {
         {
           title: "进店提醒1",
           content: "测试进店提醒1",
+          primaryKey: "title",
+          showFooter: true,
           ok: () => {
             console.log("ok");
           },
@@ -34,6 +39,7 @@ export default {
         {
           title: "进店提醒2",
           content: "测试进店提醒2",
+          primaryKey: "title",
           ok: () => {
             console.log("ok");
           },
@@ -44,6 +50,7 @@ export default {
         {
           title: "进店提醒3",
           content: "测试进店提醒3",
+          primaryKey: "title",
           ok: () => {
             console.log("ok");
           },
@@ -54,6 +61,7 @@ export default {
         {
           title: "进店提醒4",
           content: "测试进店提醒4",
+          primaryKey: "title",
           ok: () => {
             console.log("ok");
           },
@@ -64,6 +72,7 @@ export default {
         {
           title: "进店提醒5",
           content: "测试进店提醒5",
+          primaryKey: "title",
           ok: () => {
             console.log("ok");
           },
@@ -91,6 +100,15 @@ export default {
         }
       };
       this.dataInfo.push(_tempObj);
+    },
+    ok() {
+      console.log("ok");
+    },
+    cancel() {
+      console.log("cancel");
+    },
+    close() {
+      console.log("close");
     }
   }
 };

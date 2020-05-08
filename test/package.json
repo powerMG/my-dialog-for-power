@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.4",
-    "my-dialog-power": "file:public/static/my-dialog-power-0.1.6.tgz",
+    "my-dialog-power": "file:src/assets/my-dialog-power-0.1.6.tgz",
     "vue": "^2.6.11"
   },
   "devDependencies": {

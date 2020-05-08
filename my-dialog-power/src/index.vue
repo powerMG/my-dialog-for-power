@@ -2,18 +2,25 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-05-07 15:23:41
- * @LastEditTime: 2020-05-07 18:34:19
+ * @LastEditTime: 2020-05-08 14:22:03
  -->
 <template>
   <div class="dialog-power-group">
     <template v-for="item in currentDataInfo">
       <dialog-plugin
-        :key="item.title"
+        :key="item[item.primaryKey]"
         :ref="'dialogList'+item.__id__"
         :items="item"
-        @closeDialog="closeDialog"
+        :isContent="isShowContent"
+        :isFooter="isShowFooter"
+        @closeDialog="closeDialog(arguments[0],'close')"
+        @okDialog="closeDialog(arguments[0],'ok')"
+        @cancelDialog="closeDialog(arguments[0],'cancel')"
         class="dialog-power-main"
-      />
+      >
+        <slot name="content" slot="content"></slot>
+        <slot name="footer" slot="footer"></slot>
+      </dialog-plugin>
     </template>
   </div>
 </template>
@@ -25,7 +32,9 @@ export default {
   props: ["dataInfo"],
   data() {
     return {
-      defaultTop: 0
+      defaultTop: 0,
+      isShowContent: !this.$slots.content,
+      isShowFooter: !this.$slots.footer
     };
   },
   mounted() {
@@ -66,8 +75,9 @@ export default {
       });
     },
     /* 关闭当前弹窗信息 */
-    closeDialog(item) {
+    closeDialog(item, type) {
       let self = this;
+      self.$emit(`${type}`);
       // 定时移除当前关闭元素
       setTimeout(() => {
         let _removeInfo = self.currentDataInfo.find(

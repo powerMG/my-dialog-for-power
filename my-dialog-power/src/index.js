@@ -1,4 +1,10 @@
-import myDialogPlugin from "./myDialogPlugin.vue";
+/*
+ * @Author: xmwang
+ * @LastEditors: xmwang
+ * @Date: 2020-04-22 09:50:42
+ * @LastEditTime: 2020-05-08 10:35:54
+ */
+import myDialogPlugin from "./index.vue";
 const components = [myDialogPlugin]
 /**
  * 绑定组件
