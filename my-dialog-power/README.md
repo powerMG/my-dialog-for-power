@@ -2,7 +2,7 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-22 09:50:42
- * @LastEditTime: 2020-05-08 18:59:44
+ * @LastEditTime: 2020-05-08 19:28:21
  -->
 
 # my-dialog-power
@@ -67,7 +67,7 @@ dataInfo:[
 
 ### 版本号：
 
-> V0.1.10
+> V0.1.11
 ```
 1：新增属性zIndex调整优先级
 2：修复ie11兼容问题

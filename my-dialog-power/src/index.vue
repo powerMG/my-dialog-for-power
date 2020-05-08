@@ -2,7 +2,7 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-05-07 15:23:41
- * @LastEditTime: 2020-05-08 18:53:36
+ * @LastEditTime: 2020-05-08 19:36:29
  -->
 <template>
   <div class="dialog-power-group">
@@ -40,10 +40,6 @@ export default {
     };
   },
   mounted() {
-    // 初始化行内样式
-    if (this.zIndex > 0) {
-      this.styleInfo += `zIndex:${this.zIndex};`;
-    }
     // 初始化计算高度
     this.initDialogTop(this.currentDataInfo);
   },
@@ -69,7 +65,11 @@ export default {
   methods: {
     /* 初始化当前dialog顶部距离 */
     initDialogTop(dataInfo) {
-      let self = this;
+      let self = this;      
+    // 初始化行内样式
+    if (this.zIndex > 0) {
+      this.styleInfo += `zIndex:${this.zIndex};`;
+    }
       if (dataInfo.length > 4) {
         self.defaultTop = 10;
       } else {

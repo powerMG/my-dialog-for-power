@@ -1,6 +1,6 @@
 {
   "name": "my-dialog-power",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "main": "lib/my-dialog-power.common.js",
   "style": "lib/my-dialog-power.css",
   "private": false,
