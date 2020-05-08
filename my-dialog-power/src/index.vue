@@ -2,7 +2,7 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-05-07 15:23:41
- * @LastEditTime: 2020-05-08 17:32:09
+ * @LastEditTime: 2020-05-08 18:38:08
  -->
 <template>
   <div class="dialog-power-group">
@@ -70,7 +70,11 @@ export default {
       }
       dataInfo.forEach((item, i) => {
         let _currentVm = self.$refs[`dialogList${item.__id__}`][0];
-        _currentVm.$el.style = `top:${i * self.defaultTop + 10}px;`;
+        if (!!window.ActiveXObject || "ActiveXObject" in window) {
+          _currentVm.$el.style.top = i * self.defaultTop + 10 + "px";
+        } else {
+          _currentVm.$el.style = `top:${i * self.defaultTop + 10}px;`;
+        }
         item.__classInfo__ = "fadeInUp";
       });
     },
