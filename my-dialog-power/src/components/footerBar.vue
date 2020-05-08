@@ -2,7 +2,7 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-22 09:50:42
- * @LastEditTime: 2020-05-07 15:50:13
+ * @LastEditTime: 2020-05-08 15:43:28
  -->
 <template>
   <div class="dialog-power-footer">
@@ -42,6 +42,7 @@ export default {
   margin-right: 10px;
   border-radius: 4px;
   line-height: 20px;
+  text-align: center;
   cursor: pointer;
 }
 /* .dialog-power-btn:last-child {
