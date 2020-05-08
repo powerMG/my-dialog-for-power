@@ -2,7 +2,7 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-05-07 15:23:41
- * @LastEditTime: 2020-05-08 18:38:08
+ * @LastEditTime: 2020-05-08 18:53:36
  -->
 <template>
   <div class="dialog-power-group">
@@ -17,6 +17,7 @@
         @okDialog="closeDialog(arguments[0],'ok')"
         @cancelDialog="closeDialog(arguments[0],'cancel')"
         class="dialog-power-main"
+        :style="styleInfo"
       >
         <slot name="content" slot="content"></slot>
         <slot name="footer" slot="footer"></slot>
@@ -29,15 +30,21 @@
 import dialogPlugin from "./myDialogPlugin";
 export default {
   name: "my-dialog-power",
-  props: ["dataInfo"],
+  props: ["dataInfo", "zIndex"],
   data() {
     return {
       defaultTop: 0,
       isShowContent: !this.$slots.content,
-      isShowFooter: !this.$slots.footer
+      isShowFooter: !this.$slots.footer,
+      styleInfo: ""
     };
   },
   mounted() {
+    // 初始化行内样式
+    if (this.zIndex > 0) {
+      this.styleInfo += `zIndex:${this.zIndex};`;
+    }
+    // 初始化计算高度
     this.initDialogTop(this.currentDataInfo);
   },
   computed: {

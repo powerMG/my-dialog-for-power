@@ -2,12 +2,12 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-23 10:14:22
- * @LastEditTime: 2020-05-08 17:35:43
+ * @LastEditTime: 2020-05-08 18:53:56
  -->
 
 <template>
   <div id="app">
-    <my-dialog-power :dataInfo.sync="dataInfo" @ok="ok" @cancel="cancel" @close="close">
+    <my-dialog-power :dataInfo.sync="dataInfo" @ok="ok" @cancel="cancel" @close="close" :zIndex="1">
       <!-- <div slot="content">content</div>
       <div slot="footer">footer</div>-->
     </my-dialog-power>
