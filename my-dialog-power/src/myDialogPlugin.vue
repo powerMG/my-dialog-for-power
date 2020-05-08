@@ -2,10 +2,10 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-22 09:50:42
- * @LastEditTime: 2020-05-08 13:46:37
+ * @LastEditTime: 2020-05-08 17:51:36
  -->
 <template>
-  <div class="animated" :class="itemInfo.__classInfo__">
+  <div class="animated animate__fast" :class="itemInfo.__classInfo__">
     <title-bar :title="itemInfo.title" @close="closeDialog('close')" />
     <content-bar v-if="isContent" :content="itemInfo.content" />
     <slot name="content" />
@@ -37,7 +37,7 @@ export default {
   watch: {},
   methods: {
     closeDialog(type) {
-      this.itemInfo.__classInfo__ = "lightSpeedOut";
+      this.itemInfo.__classInfo__ = "zoomOutRight";
       this.$emit(`${type}Dialog`, this.items);
     }
   }

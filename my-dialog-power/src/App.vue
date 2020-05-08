@@ -2,7 +2,7 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-23 10:14:22
- * @LastEditTime: 2020-05-08 14:18:46
+ * @LastEditTime: 2020-05-08 17:35:43
  -->
 
 <template>
@@ -27,58 +27,27 @@ export default {
         {
           title: "进店提醒1",
           content: "测试进店提醒1",
-          primaryKey: "title",
-          showFooter: true,
-          ok: () => {
-            console.log("ok");
-          },
-          cancel: () => {
-            console.log("cancel");
-          }
+          key: Math.random()
         },
         {
           title: "进店提醒2",
           content: "测试进店提醒2",
-          primaryKey: "title",
-          ok: () => {
-            console.log("ok");
-          },
-          cancel: () => {
-            console.log("cancel");
-          }
+          key: Math.random()
         },
         {
           title: "进店提醒3",
           content: "测试进店提醒3",
-          primaryKey: "title",
-          ok: () => {
-            console.log("ok");
-          },
-          cancel: () => {
-            console.log("cancel");
-          }
+          key: Math.random()
         },
         {
           title: "进店提醒4",
           content: "测试进店提醒4",
-          primaryKey: "title",
-          ok: () => {
-            console.log("ok");
-          },
-          cancel: () => {
-            console.log("cancel");
-          }
+          key: Math.random()
         },
         {
           title: "进店提醒5",
           content: "测试进店提醒5",
-          primaryKey: "title",
-          ok: () => {
-            console.log("ok");
-          },
-          cancel: () => {
-            console.log("cancel");
-          }
+          key: Math.random()
         }
       ]
     };
@@ -92,12 +61,7 @@ export default {
       let _tempObj = {
         title: "进店提醒" + _index + 1,
         content: "测试进店提醒" + _index + 1,
-        ok: () => {
-          console.log("ok");
-        },
-        cancel: () => {
-          console.log("cancel");
-        }
+        key: Math.random()
       };
       this.dataInfo.push(_tempObj);
     },

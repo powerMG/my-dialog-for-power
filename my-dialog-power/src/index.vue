@@ -2,13 +2,13 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-05-07 15:23:41
- * @LastEditTime: 2020-05-08 14:22:03
+ * @LastEditTime: 2020-05-08 17:32:09
  -->
 <template>
   <div class="dialog-power-group">
     <template v-for="item in currentDataInfo">
       <dialog-plugin
-        :key="item[item.primaryKey]"
+        :key="item.key"
         :ref="'dialogList'+item.__id__"
         :items="item"
         :isContent="isShowContent"
