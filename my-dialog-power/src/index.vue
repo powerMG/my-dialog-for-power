@@ -2,11 +2,17 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-05-07 15:23:41
- * @LastEditTime: 2020-05-08 19:36:29
+ * @LastEditTime: 2020-05-09 15:20:39
  -->
 <template>
   <div class="dialog-power-group">
-    <template v-for="item in currentDataInfo">
+    {{typeof $scopedSlots.content}}
+    {{typeof $scopedSlots.footer}}
+    isShowContent:{{isShowContent}}
+    isShowFooter:{{isShowFooter}}
+    <template
+      v-for="item in currentDataInfo"
+    >
       <dialog-plugin
         :key="item.key"
         :ref="'dialogList'+item.__id__"
@@ -19,8 +25,8 @@
         class="dialog-power-main"
         :style="styleInfo"
       >
-        <slot name="content" slot="content"></slot>
-        <slot name="footer" slot="footer"></slot>
+        <slot name="content" :row="item" slot="content"></slot>
+        <slot name="footer" :row="item" slot="footer"></slot>
       </dialog-plugin>
     </template>
   </div>
@@ -34,12 +40,14 @@ export default {
   data() {
     return {
       defaultTop: 0,
-      isShowContent: !this.$slots.content,
-      isShowFooter: !this.$slots.footer,
+      isShowContent: false,
+      isShowFooter: false,
       styleInfo: ""
     };
   },
   mounted() {
+    this.isShowContent = !(typeof this.$scopedSlots.content != "undefined");
+    this.isShowFooter = !(typeof this.$scopedSlots.footer != "undefined");
     // 初始化计算高度
     this.initDialogTop(this.currentDataInfo);
   },
@@ -65,11 +73,7 @@ export default {
   methods: {
     /* 初始化当前dialog顶部距离 */
     initDialogTop(dataInfo) {
-      let self = this;      
-    // 初始化行内样式
-    if (this.zIndex > 0) {
-      this.styleInfo += `zIndex:${this.zIndex};`;
-    }
+      let self = this;
       if (dataInfo.length > 4) {
         self.defaultTop = 10;
       } else {
@@ -79,8 +83,13 @@ export default {
         let _currentVm = self.$refs[`dialogList${item.__id__}`][0];
         if (!!window.ActiveXObject || "ActiveXObject" in window) {
           _currentVm.$el.style.top = i * self.defaultTop + 10 + "px";
+          if (self.zIndex > 0) {
+            _currentVm.$el.style.zIndex = self.zIndex;
+          }
         } else {
-          _currentVm.$el.style = `top:${i * self.defaultTop + 10}px;`;
+          _currentVm.$el.style = `top:${i * self.defaultTop + 10}px;z-index:${
+            self.zIndex
+          };`;
         }
         item.__classInfo__ = "fadeInUp";
       });

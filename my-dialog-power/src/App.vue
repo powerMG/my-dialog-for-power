@@ -2,14 +2,17 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-23 10:14:22
- * @LastEditTime: 2020-05-08 18:53:56
+ * @LastEditTime: 2020-05-09 15:21:10
  -->
 
 <template>
   <div id="app">
     <my-dialog-power :dataInfo.sync="dataInfo" @ok="ok" @cancel="cancel" @close="close" :zIndex="1">
-      <!-- <div slot="content">content</div>
-      <div slot="footer">footer</div>-->
+      <!-- <div slot="content">content</div>-->
+      <!-- <template slot="footer">aaaaaaaaaaaaaaaaaaaaaaa</template> -->
+      <template #footer="item">
+        <div>footer{{item.row.title}}</div>
+      </template>
     </my-dialog-power>
     <textarea cols="150" rows="30" :value="JSON.stringify(dataInfo)"></textarea>
     <br />

@@ -1,3 +1,9 @@
+<!--
+ * @Author: xmwang
+ * @LastEditors: xmwang
+ * @Date: 2020-04-22 09:50:42
+ * @LastEditTime: 2020-05-09 13:35:51
+ -->
 <template>
   <div class="dialog-power-content">{{content}}</div>
 </template>
@@ -16,5 +22,6 @@ export default {
   min-height: 58px;
   color: #202742;
   padding: 16px 20px 0 20px;
+  line-height: 20px;
 }
 </style>

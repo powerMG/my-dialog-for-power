@@ -2,7 +2,7 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-22 09:50:42
- * @LastEditTime: 2020-05-08 19:28:21
+ * @LastEditTime: 2020-05-09 15:24:57
  -->
 
 # my-dialog-power
@@ -48,13 +48,15 @@ dataInfo:[
 ### content：内容插槽
 
 ```
-<div slot="content">这是一个内容插槽</div>
+<template #content="item">这是一个内容插槽{{item.row[.arguments]}}</template>
 ```
+
+slot="footer"
 
 ### footer：底部按钮插槽
 
 ```
-<div slot="footer">这是一个底部插槽</div>
+<div #footer="item">这是一个底部插槽{{item.row[.arguments]}}</div>
 ```
 
 > 事件
@@ -68,7 +70,13 @@ dataInfo:[
 ### 版本号：
 
 > V0.1.11
+
 ```
 1：新增属性zIndex调整优先级
 2：修复ie11兼容问题
+```
+> V0.1.12
+```
+1、解决属性zIndex无效问题
+2、更换插槽使用方式并新增了获取循环体内内容
 ```
