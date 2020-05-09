@@ -2,14 +2,10 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-05-07 15:23:41
- * @LastEditTime: 2020-05-09 15:20:39
+ * @LastEditTime: 2020-05-09 15:35:51
  -->
 <template>
   <div class="dialog-power-group">
-    {{typeof $scopedSlots.content}}
-    {{typeof $scopedSlots.footer}}
-    isShowContent:{{isShowContent}}
-    isShowFooter:{{isShowFooter}}
     <template
       v-for="item in currentDataInfo"
     >
