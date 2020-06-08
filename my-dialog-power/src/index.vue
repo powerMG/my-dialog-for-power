@@ -2,13 +2,11 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-05-07 15:23:41
- * @LastEditTime: 2020-05-09 15:35:51
+ * @LastEditTime: 2020-06-08 16:06:16
  -->
 <template>
   <div class="dialog-power-group">
-    <template
-      v-for="item in currentDataInfo"
-    >
+    <template v-for="item in currentDataInfo">
       <dialog-plugin
         :key="item.key"
         :ref="'dialogList'+item.__id__"
@@ -103,6 +101,10 @@ export default {
           self.dataInfo.splice(self.currentDataInfo.indexOf(_removeInfo), 1);
         }
       }, 1000);
+    },
+    /* slot 关闭当前弹窗 */
+    slotCloseDialog(item) {
+      this.$refs[`dialogList${item.__id__}`][0].closeDialog("close");
     }
   }
 };

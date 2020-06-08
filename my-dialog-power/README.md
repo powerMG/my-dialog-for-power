@@ -2,7 +2,7 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-22 09:50:42
- * @LastEditTime: 2020-05-09 15:24:57
+ * @LastEditTime: 2020-06-08 16:08:59
  -->
 
 # my-dialog-power
@@ -57,6 +57,10 @@ slot="footer"
 
 ```
 <div #footer="item">这是一个底部插槽{{item.row[.arguments]}}</div>
+插槽关闭窗体需要通过ref=[名称]调用组件内的"slotCloseDialog"方法
+slotCloseDialog(item.row){
+  ……
+}
 ```
 
 > 事件

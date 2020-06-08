@@ -2,7 +2,7 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-22 09:50:42
- * @LastEditTime: 2020-05-08 17:51:36
+ * @LastEditTime: 2020-06-08 15:15:32
  -->
 <template>
   <div class="animated animate__fast" :class="itemInfo.__classInfo__">
@@ -34,7 +34,8 @@ export default {
     contentBar,
     footerBar
   },
-  watch: {},
+  watch: {
+  },
   methods: {
     closeDialog(type) {
       this.itemInfo.__classInfo__ = "zoomOutRight";
