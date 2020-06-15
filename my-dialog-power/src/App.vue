@@ -2,7 +2,7 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-23 10:14:22
- * @LastEditTime: 2020-06-08 15:48:44
+ * @LastEditTime: 2020-06-15 17:27:10
  -->
 
 <template>
@@ -13,6 +13,7 @@
       @cancel="cancel"
       @close="close"
       :zIndex="1"
+      :top="30"
       ref="dialogInfo"
     >
       <!-- <div slot="content">content</div>-->

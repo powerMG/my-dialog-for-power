@@ -2,7 +2,7 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-05-07 15:23:41
- * @LastEditTime: 2020-06-08 16:06:16
+ * @LastEditTime: 2020-06-15 18:10:21
  -->
 <template>
   <div class="dialog-power-group">
@@ -30,7 +30,7 @@
 import dialogPlugin from "./myDialogPlugin";
 export default {
   name: "my-dialog-power",
-  props: ["dataInfo", "zIndex"],
+  props: ["dataInfo", "zIndex", "top"],
   data() {
     return {
       defaultTop: 0,
@@ -69,7 +69,7 @@ export default {
     initDialogTop(dataInfo) {
       let self = this;
       if (dataInfo.length > 4) {
-        self.defaultTop = 10;
+        self.defaultTop = self.top || 10;
       } else {
         self.defaultTop = 160;
       }
@@ -100,7 +100,7 @@ export default {
         if (_removeInfo) {
           self.dataInfo.splice(self.currentDataInfo.indexOf(_removeInfo), 1);
         }
-      }, 1000);
+      }, 200);
     },
     /* slot 关闭当前弹窗 */
     slotCloseDialog(item) {

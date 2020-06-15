@@ -2,7 +2,7 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-22 09:50:42
- * @LastEditTime: 2020-06-08 16:08:59
+ * @LastEditTime: 2020-06-15 17:30:11
  -->
 
 # my-dialog-power
@@ -42,6 +42,7 @@ dataInfo:[
 | 2    | content  | String         | 内容（注意：如果使用 slot 时该属性无效） |
 | 3    | key      | Number\|String | 唯一标识，防止组件复用                   |
 | 4    | zIndex   | Number         | 调整优先级                               |
+| 5    | top   | Number         | 调整每个弹窗的间距                               |
 
 > 插槽
 
