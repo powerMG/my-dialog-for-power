@@ -29,9 +29,12 @@ dataInfo:弹窗的数据集合:
 
 dataInfo:[
   {
-    title: "进店提醒",
-    content: "测试进店提醒"
-    primaryKey:1
+    title: "进店提醒", // 弹窗标题
+    content: "测试进店提醒" // 弹窗内容
+    key:1 // 唯一key
+    [,isAuotClose: true] // 非必须项：是否自动关闭
+    [,autoCloseNum: 3] // 非必须项：自动关闭时长（秒），默认3秒
+    [,titleBgColor: "#fff"] // 非必须项：自定义标题的底色
   }
 ]
 ```

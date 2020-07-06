@@ -6,7 +6,11 @@
  -->
 <template>
   <div class="animated animate__fast" :class="itemInfo.__classInfo__">
-    <title-bar :title="itemInfo.title" @close="closeDialog('close')" />
+    <title-bar
+      :title="itemInfo.title"
+      :titleBgColor="itemInfo.titleBgColor"
+      @close="closeDialog('close')"
+    />
     <content-bar v-if="isContent" :content="itemInfo.content" />
     <slot name="content" />
     <footer-bar v-if="isFooter" @ok="closeDialog('ok')" @cancel="closeDialog('cancel')" />
@@ -24,22 +28,35 @@ export default {
   data() {
     return {
       isIn: true,
-      itemInfo: this.items
+      itemInfo: this.items,
+      timer: null
     };
   },
-  mounted() {},
+  mounted() {
+    if (this.itemInfo && this.itemInfo.isAuotClose) {
+      this.timer = setTimeout(() => {
+        this.closeDialog("close", true);
+      }, this.itemInfo.autoCloseNum * 1000);
+    }
+  },
   computed: {},
   components: {
     titleBar,
     contentBar,
     footerBar
   },
-  watch: {
-  },
+  watch: {},
   methods: {
-    closeDialog(type) {
-      this.itemInfo.__classInfo__ = "zoomOutRight";
-      this.$emit(`${type}Dialog`, this.items);
+    closeDialog(type, istimer) {
+      // this.itemInfo.__classInfo__ = "zoomOutRight";
+      this.itemInfo.__classInfo__ = "fadeOutRight";
+      setTimeout(() => {
+        this.$emit(`${type}Dialog`, this.items);
+        // 手动触发并且是定时关闭的弹窗需要清定时器，防止找不到dom元素报错
+        if (!istimer && this.itemInfo && this.itemInfo.isAuotClose) {
+          clearTimeout(this.timer);
+        }
+      }, 800);
     }
   }
 };

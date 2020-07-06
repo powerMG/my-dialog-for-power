@@ -5,7 +5,7 @@
  * @LastEditTime: 2020-05-07 15:49:36
  -->
 <template>
-  <div class="dialog-power-title">
+  <div class="dialog-power-title" :style="`background:${titleBgColor};`">
     <div class="dialog-power-title-item dialog-power-title-left">{{title}}</div>
     <div class="dialog-power-title-item dialog-power-title-right" @click="closeDialog()">X</div>
   </div>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  props: ["title"],
+  props: ["title", "titleBgColor"],
   data() {
     return {};
   },
@@ -29,9 +29,9 @@ export default {
 <style scoped>
 .dialog-power-title {
   height: 32px;
-  background: #4285f4;
+  background: #eaf2ff;
   border-bottom: solid 1px #f3f3f3;
-  color: #fff;
+  color: #4285f4;
   line-height: 32px;
   text-align: left;
   padding-left: 10px;
@@ -46,5 +46,6 @@ export default {
   width: 10%;
   cursor: pointer;
   text-align: center;
+  color: #0000004d;
 }
 </style>

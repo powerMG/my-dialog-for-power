@@ -23,6 +23,13 @@
         <slot name="footer" :row="item" slot="footer"></slot>
       </dialog-plugin>
     </template>
+    <div
+      v-if="currentDataInfo.length>5"
+      class="dialog-btn--closeAll animated"
+      :class="[currentDataInfo.length>5?'fadeIn':'']"
+      :style="`bottom:${defaultBottom-27}px;`"
+      @click="closeAll"
+    >关闭全部</div>
   </div>
 </template>
 
@@ -30,10 +37,10 @@
 import dialogPlugin from "./myDialogPlugin";
 export default {
   name: "my-dialog-power",
-  props: ["dataInfo", "zIndex", "top"],
+  props: ["dataInfo", "zIndex", "bottom"],
   data() {
     return {
-      defaultTop: 0,
+      defaultBottom: 0,
       isShowContent: false,
       isShowFooter: false,
       styleInfo: ""
@@ -43,7 +50,7 @@ export default {
     this.isShowContent = !(typeof this.$scopedSlots.content != "undefined");
     this.isShowFooter = !(typeof this.$scopedSlots.footer != "undefined");
     // 初始化计算高度
-    this.initDialogTop(this.currentDataInfo);
+    this.initDialogInfo(this.currentDataInfo);
   },
   computed: {
     /* 计算当前数据源信息 */
@@ -61,29 +68,32 @@ export default {
   },
   watch: {
     currentDataInfo(val) {
-      setTimeout(() => this.initDialogTop(val), 300);
+      setTimeout(() => this.initDialogInfo(val), 300);
     }
   },
   methods: {
     /* 初始化当前dialog顶部距离 */
-    initDialogTop(dataInfo) {
+    initDialogInfo(dataInfo) {
       let self = this;
-      if (dataInfo.length > 4) {
-        self.defaultTop = self.top || 10;
+      if (dataInfo.length > 1) {
+        self.defaultBottom = self.bottom || 40;
       } else {
-        self.defaultTop = 160;
+        self.defaultBottom = 40;
       }
       dataInfo.forEach((item, i) => {
+        let _currentNum = i > 5 ? 5 : i;
+        let _currentMaxNum = dataInfo.length > 5 ? 5 : dataInfo.length;
         let _currentVm = self.$refs[`dialogList${item.__id__}`][0];
         if (!!window.ActiveXObject || "ActiveXObject" in window) {
-          _currentVm.$el.style.top = i * self.defaultTop + 10 + "px";
+          _currentVm.$el.style.bottom =
+            (_currentMaxNum - _currentNum || 1) * self.defaultBottom + "px";
           if (self.zIndex > 0) {
-            _currentVm.$el.style.zIndex = self.zIndex;
+            // _currentVm.$el.style.zIndex = self.zIndex;
+            _currentVm.$el.style.zIndex = i;
           }
         } else {
-          _currentVm.$el.style = `top:${i * self.defaultTop + 10}px;z-index:${
-            self.zIndex
-          };`;
+          _currentVm.$el.style = `bottom:${(_currentMaxNum - _currentNum || 1) *
+            self.defaultBottom}px;z-index:${self.zIndex};`;
         }
         item.__classInfo__ = "fadeInUp";
       });
@@ -92,19 +102,21 @@ export default {
     closeDialog(item, type) {
       let self = this;
       self.$emit(`${type}`);
-      // 定时移除当前关闭元素
-      setTimeout(() => {
-        let _removeInfo = self.currentDataInfo.find(
-          itemInfo => itemInfo.__id__ === item.__id__
-        );
-        if (_removeInfo) {
-          self.dataInfo.splice(self.currentDataInfo.indexOf(_removeInfo), 1);
-        }
-      }, 200);
+      let _removeInfo = self.currentDataInfo.find(
+        itemInfo => itemInfo.__id__ === item.__id__
+      );
+      if (_removeInfo) {
+        self.dataInfo.splice(self.currentDataInfo.indexOf(_removeInfo), 1);
+      }
     },
     /* slot 关闭当前弹窗 */
     slotCloseDialog(item) {
       this.$refs[`dialogList${item.__id__}`][0].closeDialog("close");
+    },
+    /* 关闭所有窗体 */
+    closeAll() {
+      // 关闭所有
+      this.$emit("update:dataInfo", []);
     }
   }
 };
@@ -118,9 +130,27 @@ export default {
   font-size: 12px;
   background: #fff;
   position: fixed;
-  top: 10px;
-  right: 10px;
+  bottom: 40px;
+  right: 20px;
   opacity: 0;
   filter: alpha(opacity=0);
+}
+.dialog-power-group {
+  position: relative;
+}
+.dialog-btn--closeAll {
+  text-align: right;
+  border-top: solid 1px #e3e3e3;
+  padding: 5px 20px;
+  position: fixed;
+  bottom: 13px;
+  right: 20px;
+  z-index: 1;
+  width: 238px;
+  background: #fff;
+  box-shadow: 0px 6px 4px rgba(1, 1, 1, 0.3);
+  font-size: 12px;
+  cursor: pointer;
+  color: #4285f4;
 }
 </style>
