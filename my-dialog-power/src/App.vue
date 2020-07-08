@@ -14,6 +14,7 @@
       @close="close"
       :zIndex="1"
       :bottom="45"
+      :showCloseAll="true"
       ref="dialogInfo"
     >
       <!-- <div slot="content">content</div>-->

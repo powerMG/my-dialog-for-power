@@ -15,6 +15,13 @@
     <slot name="content" />
     <footer-bar v-if="isFooter" @ok="closeDialog('ok')" @cancel="closeDialog('cancel')" />
     <slot name="footer" />
+    <div
+      v-if="isCloseAll"
+      class="dialog-btn--closeAll animated"
+      :class="[isCloseAll?'fadeIn':'']"
+      @click="closeAll"
+    >关闭全部</div>
+    <!-- <div class="dialog-btn--closeAll animated">关闭全部</div> -->
   </div>
 </template>
 
@@ -24,7 +31,7 @@ import contentBar from "./components/contentBar";
 import footerBar from "./components/footerBar";
 import "animate.css";
 export default {
-  props: ["items", "isContent", "isFooter"],
+  props: ["items", "isContent", "isFooter", "isCloseAll"],
   data() {
     return {
       isIn: true,
@@ -36,7 +43,7 @@ export default {
     if (this.itemInfo && this.itemInfo.isAuotClose) {
       this.timer = setTimeout(() => {
         this.closeDialog("close", true);
-      }, this.itemInfo.autoCloseNum * 1000);
+      }, (this.itemInfo.autoCloseNum || 3) * 1000);
     }
   },
   computed: {},
@@ -57,10 +64,30 @@ export default {
           clearTimeout(this.timer);
         }
       }, 800);
+    },
+    // 全部关闭
+    closeAll() {
+      this.$emit("closeAll");
     }
   }
 };
 </script>
 
 <style scoped>
+.dialog-btn--closeAll {
+  text-align: right;
+  border-top: 1px solid #e3e3e3;
+  padding: 5px 20px;
+  position: fixed;
+  bottom: -28px;
+  z-index: 1;
+  height: 28px;
+  width: 278px;
+  background: #fff;
+  box-shadow: 0 6px 4px rgba(1, 1, 1, 0.3);
+  font-size: 12px;
+  cursor: pointer;
+  color: #4285f4;
+  box-sizing: border-box;
+}
 </style>

@@ -45,7 +45,8 @@ dataInfo:[
 | 2    | content  | String         | 内容（注意：如果使用 slot 时该属性无效） |
 | 3    | key      | Number\|String | 唯一标识，防止组件复用                   |
 | 4    | zIndex   | Number         | 调整优先级                               |
-| 5    | top   | Number         | 调整每个弹窗的间距                               |
+| 5    | bottom   | Number         | 调整每个弹窗的间距                               |
+| 6    | showCloseAll   | Boolen         | 是否开启全部关闭                               |
 
 > 插槽
 

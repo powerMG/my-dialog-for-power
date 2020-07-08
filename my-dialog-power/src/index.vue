@@ -13,9 +13,11 @@
         :items="item"
         :isContent="isShowContent"
         :isFooter="isShowFooter"
+        :isCloseAll="isCloseAll"
         @closeDialog="closeDialog(arguments[0],'close')"
         @okDialog="closeDialog(arguments[0],'ok')"
         @cancelDialog="closeDialog(arguments[0],'cancel')"
+        @closeAll="closeAll"
         class="dialog-power-main"
         :style="styleInfo"
       >
@@ -23,13 +25,6 @@
         <slot name="footer" :row="item" slot="footer"></slot>
       </dialog-plugin>
     </template>
-    <div
-      v-if="currentDataInfo.length>5"
-      class="dialog-btn--closeAll animated"
-      :class="[currentDataInfo.length>5?'fadeIn':'']"
-      :style="`bottom:${defaultBottom-27}px;`"
-      @click="closeAll"
-    >关闭全部</div>
   </div>
 </template>
 
@@ -37,7 +32,7 @@
 import dialogPlugin from "./myDialogPlugin";
 export default {
   name: "my-dialog-power",
-  props: ["dataInfo", "zIndex", "bottom"],
+  props: ["dataInfo", "zIndex", "bottom", "showCloseAll"],
   data() {
     return {
       defaultBottom: 0,
@@ -61,6 +56,10 @@ export default {
         item.__classInfo__ = "";
         return item;
       });
+    },
+    /* 计算是否显示全部关闭 */
+    isCloseAll() {
+      return this.showCloseAll || this.currentDataInfo.length > 5;
     }
   },
   components: {
@@ -134,23 +133,5 @@ export default {
   right: 20px;
   opacity: 0;
   filter: alpha(opacity=0);
-}
-.dialog-power-group {
-  position: relative;
-}
-.dialog-btn--closeAll {
-  text-align: right;
-  border-top: solid 1px #e3e3e3;
-  padding: 5px 20px;
-  position: fixed;
-  bottom: 13px;
-  right: 20px;
-  z-index: 1;
-  width: 238px;
-  background: #fff;
-  box-shadow: 0px 6px 4px rgba(1, 1, 1, 0.3);
-  font-size: 12px;
-  cursor: pointer;
-  color: #4285f4;
 }
 </style>
