@@ -74,25 +74,29 @@ export default {
     /* 初始化当前dialog顶部距离 */
     initDialogInfo(dataInfo) {
       let self = this;
-      if (dataInfo.length > 1) {
-        self.defaultBottom = self.bottom || 40;
-      } else {
-        self.defaultBottom = 40;
-      }
+      self.defaultBottom = self.bottom || 40;
       dataInfo.forEach((item, i) => {
         let _currentNum = i > 5 ? 5 : i;
         let _currentMaxNum = dataInfo.length > 5 ? 5 : dataInfo.length;
         let _currentVm = self.$refs[`dialogList${item.__id__}`][0];
+        // 计算当前的窗体数量
+        let _windowIndex = _currentMaxNum - _currentNum;
+        // 计算底部距离
+        let _buttomNum =
+          _windowIndex <= 1
+            ? self.defaultBottom
+            : _windowIndex * self.defaultBottom -
+              (_windowIndex - 1) * (self.defaultBottom - 40);
+        // 计算偏移
+        // let _num = i * 20;
         if (!!window.ActiveXObject || "ActiveXObject" in window) {
-          _currentVm.$el.style.bottom =
-            (_currentMaxNum - _currentNum || 1) * self.defaultBottom + "px";
+          _currentVm.$el.style.bottom = _buttomNum + "px";
           if (self.zIndex > 0) {
             // _currentVm.$el.style.zIndex = self.zIndex;
             _currentVm.$el.style.zIndex = i;
           }
         } else {
-          _currentVm.$el.style = `bottom:${(_currentMaxNum - _currentNum || 1) *
-            self.defaultBottom}px;z-index:${self.zIndex};`;
+          _currentVm.$el.style = `bottom:${_buttomNum}px;z-index:${self.zIndex};`;
         }
         item.__classInfo__ = "fadeInUp";
       });

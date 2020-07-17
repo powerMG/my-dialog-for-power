@@ -13,8 +13,8 @@
       @cancel="cancel"
       @close="close"
       :zIndex="1"
-      :bottom="45"
-      :showCloseAll="true"
+      :bottom="66"
+      :showCloseAll="dataInfo.length>=2"
       ref="dialogInfo"
     >
       <!-- <div slot="content">content</div>-->
