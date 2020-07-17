@@ -2,7 +2,7 @@
  * @Author: xmwang
  * @LastEditors: xmwang
  * @Date: 2020-04-22 09:50:42
- * @LastEditTime: 2020-05-08 10:35:54
+ * @LastEditTime: 2020-07-17 20:13:54
  */
 import myDialogPlugin from "./index.vue";
 const components = [myDialogPlugin]
